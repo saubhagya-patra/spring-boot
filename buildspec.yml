@@ -4,20 +4,20 @@ phases:
   pre_build:
     commands:
       - echo Logging into ECR...
-      - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 141939821191.dkr.ecr.eu-north-1.amazonaws.com
+      - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 141939821191.dkr.ecr.eu-north-1.amazonaws.com/springbootapp
 
   build:
     commands:
       - echo Build started
       - mvn clean package
       - docker build -t springboot-app .
-      - docker tag springboot-app:latest 141939821191.dkr.ecr.eu-north-1.amazonaws.com/springboot-app:latest
+      - docker tag springboot-app:latest 141939821191.dkr.ecr.eu-north-1.amazonaws.com/springbootapp:latest
 
   post_build:
     commands:
       - echo Pushing Docker image...
-      - docker push 141939821191.dkr.ecr.eu-north-1.amazonaws.com/springboot-app:latest
-      - printf '[{"name":"spring-container","imageUri":"%s"}]' 141939821191.dkr.ecr.eu-north-1.amazonaws.com/springboot-app:latest > imagedefinitions.json
+      - docker push 141939821191.dkr.ecr.eu-north-1.amazonaws.com/springbootapp:latest
+      - printf '[{"name":"spring-container","imageUri":"%s"}]' 141939821191.dkr.ecr.eu-north-1.amazonaws.com/springbootapp:latest > imagedefinitions.json
 
 artifacts:
   files:
