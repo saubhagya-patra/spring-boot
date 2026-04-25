@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 amazoncorretto:11    # ✅ Docker Hub, no auth needed
+FROM --platform=linux/amd64 amazoncorretto:11
 WORKDIR /app
 COPY ./target/app.jar /app
 EXPOSE 8080
