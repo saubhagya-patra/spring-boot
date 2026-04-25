@@ -5,17 +5,21 @@ phases:
     commands:
       - echo Logging into ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 141939821191.dkr.ecr.us-east-1.amazonaws.com
+      - echo Logging into ECR Public...
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
 
   build:
     commands:
       - echo Build started
       - mvn clean package -DskipTests
       - echo "--- Listing target folder ---"
-      - ls -la target/                          # ✅ confirm JAR was created
+      - ls -la target/
+      - echo "--- Checking Dockerfile ---"
+      - cat Dockerfile
       - echo "--- Building Docker image ---"
-      - docker build --platform linux/amd64 -t 141939821191.dkr.ecr.us-east-1.amazonaws.com/demo-springboot-app:latest .
+      - docker build --platform linux/amd64 --progress=plain -t 141939821191.dkr.ecr.us-east-1.amazonaws.com/demo-springboot-app:latest . 2>&1
       - echo "--- Docker images available ---"
-      - docker images                           # ✅ confirm image exists after build
+      - docker images
 
   post_build:
     commands:

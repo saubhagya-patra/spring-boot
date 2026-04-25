@@ -1,6 +1,5 @@
-FROM --platform=linux/amd64 eclipse-temurin:11-jdk-jammy
+FROM --platform=linux/amd64 public.ecr.aws/amazoncorretto/amazoncorretto:11
 WORKDIR /app
 COPY ./target/app.jar /app
 EXPOSE 8080
-#Command to run the application
-CMD ["java","-jar","app.jar"]
+CMD ["java", "-jar", "app.jar"]
