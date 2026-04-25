@@ -10,8 +10,7 @@ phases:
     commands:
       - echo Build started
       - mvn clean package
-      - docker build -t demo-springboot-app .
-      - docker tag demo-springboot-app:latest 141939821191.dkr.ecr.us-east-1.amazonaws.com/demo-springboot-app:latest  # ✅ ADD THIS
+      - docker build -t 141939821191.dkr.ecr.us-east-1.amazonaws.com/demo-springboot-app:latest .  # ✅ Build directly with full ECR tag
 
   post_build:
     commands:
