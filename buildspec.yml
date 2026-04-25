@@ -13,7 +13,7 @@ phases:
       - echo "--- Listing target folder ---"
       - ls -la target/                          # ✅ confirm JAR was created
       - echo "--- Building Docker image ---"
-      - docker build -t 141939821191.dkr.ecr.us-east-1.amazonaws.com/demo-springboot-app:latest .
+      - docker build --platform linux/amd64 -t 141939821191.dkr.ecr.us-east-1.amazonaws.com/demo-springboot-app:latest .
       - echo "--- Docker images available ---"
       - docker images                           # ✅ confirm image exists after build
 

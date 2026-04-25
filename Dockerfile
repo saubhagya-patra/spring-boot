@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11-jdk-jammy
+FROM --platform=linux/amd64 eclipse-temurin:11-jdk-jammy
 WORKDIR /app
 COPY ./target/app.jar /app
 EXPOSE 8080
