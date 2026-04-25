@@ -9,8 +9,13 @@ phases:
   build:
     commands:
       - echo Build started
-      - mvn clean package
-      - docker build -t 141939821191.dkr.ecr.us-east-1.amazonaws.com/demo-springboot-app:latest .  # ✅ Build directly with full ECR tag
+      - mvn clean package -DskipTests
+      - echo "--- Listing target folder ---"
+      - ls -la target/                          # ✅ confirm JAR was created
+      - echo "--- Building Docker image ---"
+      - docker build -t 141939821191.dkr.ecr.us-east-1.amazonaws.com/demo-springboot-app:latest .
+      - echo "--- Docker images available ---"
+      - docker images                           # ✅ confirm image exists after build
 
   post_build:
     commands:
